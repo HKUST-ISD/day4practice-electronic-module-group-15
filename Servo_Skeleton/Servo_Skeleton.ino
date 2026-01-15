@@ -6,11 +6,11 @@
 Servo servo; // Create servo object
 String command; // using string to store the message receive from serial monitor
 // Define the pins where the servo are connected
-const int PWMpin = ?;
+const int PWMpin = 2;
 
 void setup() {
-servo.attach(?); // Servo object servo should be attached to a ESP32 PWM pin
-Serial.begin(?); // Initialize the Serial Monitor and set baudrate
+servo.attach(PWMpin); // Servo object servo should be attached to a ESP32 PWM pin
+Serial.begin(9600); // Initialize the Serial Monitor and set baudrate
 }
     /*in continuous rotation servo servo.write(value) value of 0~180 dictates speed and direction.
       Stop: Send a value near 90 (e.g., servo.write(90);).
@@ -27,10 +27,10 @@ void loop() {
     Serial.println("Error: sd must be between 0 and 180.");
   } else{
     // print the sd in serial monitor
-    Serial.println(?); 
+    Serial.println(sd); 
    
     // set servo speed and direction
-    servo.write(?);
+    servo.write(sd);
   }
 }
 delay(100); 
