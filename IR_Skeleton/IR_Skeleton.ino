@@ -12,14 +12,14 @@
 
 // Define the GPIO pin to which the IR Sensor is connected
 // Using "#define", we can define a constant value that can be used throughout the code 
-#define SENSOR_DO_PIN ? // ESP32 pin connected to DO pin of IR sensor
-#define SENSOR_AO_PIN ? // ESP32 pin connected to AO pin of IR sensor
-#define LED ? // ESP32 pin connected to LED
+#define SENSOR_DO_PIN 37 // ESP32 pin connected to DO pin of IR sensor
+#define SENSOR_AO_PIN 38 // ESP32 pin connected to AO pin of IR sensor
+#define LED 1 // ESP32 pin connected to LED
 
 void setup() {
   
   
-    Serial.begin(?);   // Initialize the Serial Monitor and set baud rate
+    Serial.begin(9600);   // Initialize the Serial Monitor and set baud rate
 
     /*
         Here, since we are reading IR sensor state 
@@ -27,10 +27,10 @@ void setup() {
         This will allow us to read the state of DO pin of IR sensor using the "digitalRead()" function 
         and read the value of AO pin of IR sensor using the "analogRead()" function 
     */
-    pinMode(?, ?);
-    pinMode(?, ?);
+    pinMode(SENSOR_DO_PIN, INPUT);
+    pinMode(SENSOR_AO_PIN, INPUT);
     // set LED pin mode 
-    pinMode(?, ?);
+    pinMode(LED, OUTPUT);
 }
 
 void loop() {
@@ -45,27 +45,27 @@ void loop() {
         The "analogRead()" function will return the reading of AO pin, limited to the resolution of the analog to digital converter of ESP32 S3, which is 0-4095 for 12 bits
         We use a variable "state" to store the state of the IR Sensor DO output and value of AO output
     */
-    int state = digitalRead(?); 
-    int value= analogRead(?);
+    int state = digitalRead(SENSOR_DO_PIN); 
+    int value= analogRead(SENSOR_AO_PIN);
     // We will use if-else statement to check the state of the IR Sensor and turn on LED when the IR Sensor detects an obstacle
     // Print a message to the Serial Monitor to show whether the IR Sensor is detecting an obstacle or not
     //Turn ON the LED when the IR Sensor detects an obstacle
 
-    if (state == ?){
+    if (state == LOW){
         // If the IR Sensor is detecting an obstacle
-        Serial.println(?);
-        digitalWrite(?,?);
+        Serial.println("Detected");
+        digitalWrite(LED,HIGH);
     }
     else{
         //If the IR Sensor is NOT detecting an obstacle
-        Serial.println(?);
-        digitalWrite(?,?);
+        Serial.println("Not detected");
+        digitalWrite(LED,LOW);
 
     } 
     //print the reading of AO output
     Serial.print("AO reading:");
-    Serial.println(?);
-    delay(?); // Delay 0.1s to avoid reading the state too fast
+    Serial.println(value);
+    delay(100); // Delay 0.1s to avoid reading the state too fast
 
     /* 
         You may adjust the sensitivity of the IR Sensor 
