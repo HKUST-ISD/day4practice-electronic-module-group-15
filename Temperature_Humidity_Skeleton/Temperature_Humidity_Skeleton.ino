@@ -1,11 +1,12 @@
 /*Replace ? in the code to read the temperature and Humidity */
 #include <DHT.h>
-#define DHT11_PIN  ? // Select a ESP32 pin connected to DHT11 sensor Signal
+#include <Arduino.h>
+#define DHT11_PIN  38 // Select a ESP32 pin connected to DHT11 sensor Signal
 
 DHT dht11(DHT11_PIN, DHT11);
 
 void setup() {
-  Serial.begin(?); // ***Start the serial communication (baud rate as 9600).***
+  Serial.begin(9600); // ***Start the serial communication (baud rate as 9600).***
   dht11.begin(); // initialize the DHT11 sensor 
 }
 
@@ -38,5 +39,5 @@ void loop() {
   /*Do not change above code*/
 
  // DHT sensor is very slow getting the readings (the sensor readings may take up to 2 seconds) 
-  delay(?);  // wait 2 seconds between readings delay(ms) The function admits a number of milliseconds to pause
+  delay(2000);  // wait 2 seconds between readings delay(ms) The function admits a number of milliseconds to pause
 }
